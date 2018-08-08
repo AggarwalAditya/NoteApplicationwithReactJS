@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 
 
+/*
+	Fat arrow functions have been used to consider the latest practices of ECMA 6
+*/
+
 class Comment extends Component
 {
 
@@ -19,7 +23,7 @@ class Comment extends Component
 
   edit = () =>
   {
-      this.setState({editing:true});    
+      this.setState({editing:true});   //setState is a predefined function. Every time it gets called, the virtual DOM is redesigned.   
      
 
   }
@@ -38,6 +42,8 @@ class Comment extends Component
       this.props.removeComment(this.props.index);
   }
 
+  
+  //renders view in NON-EDITING mode.
   renderNormal()
   {
       return(
@@ -52,7 +58,7 @@ class Comment extends Component
   }
 
 
-
+//renders view in EDITING mode.
   renderForm()
   {
       return(
@@ -67,6 +73,8 @@ class Comment extends Component
 
   render()
   {
+	  
+	  //to see if the mode is editing
       if(this.state.editing)
       {
           return this.renderForm();
@@ -79,12 +87,14 @@ class Comment extends Component
 }
 
 
+//Layout Component for all the other components
 class Board extends Component
 {
   constructor(props)
   {
       super(props);
 
+	  
       this.state={
         comments: [
             "eggs",
@@ -127,6 +137,7 @@ class Board extends Component
           <h1>Note App using ReactJS</h1>
           <hr />
           {
+			  //mapping "commments" state with <Comment> component.
               this.state.comments.map(this.eachComment)
           }
         </div>
@@ -134,10 +145,13 @@ class Board extends Component
   }
 }
 
+
+
+//only made to cover up <Board > component
 class App extends Component {
   render() {
     return (
-      <Board className="centre"/>
+      <Board className="centre"/>  //since class is a predefined keyword, "className" is used in JSX
     );
   }
 }
