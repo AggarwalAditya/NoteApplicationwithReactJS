@@ -21,7 +21,7 @@ class Comment extends Component
   }
  
 
-  edit = () =>
+  change = () =>
   {
       this.setState({editing:true});   //setState is a predefined function. Every time it gets called, the virtual DOM is redesigned.   
      
@@ -31,7 +31,7 @@ class Comment extends Component
   save = () =>
   {
       let val = this.refs.newText.value;
-      this.props.updateCommentText(val,this.props.index);
+      this.props.updateCommentData(val,this.props.index);
       this.setState({editing:false});
       
   }
@@ -49,8 +49,8 @@ class Comment extends Component
       return(
         <div className="commentContainer">
           <div className="card-header norm">{this.props.children}</div>
-          <div class="card-body">
-            <button onClick={this.edit} className="btn btn-primary">Edit</button>
+          <div className="card-body">
+            <button onClick={this.change} className="btn btn-primary">Edit</button>
             <button onClick={this.remove} className="btn btn-danger">Remove</button>
           </div>
         </div> 
@@ -88,7 +88,7 @@ class Comment extends Component
 
 
 //Layout Component for all the other components
-class Board extends Component
+class Layout extends Component
 {
   constructor(props)
   {
@@ -124,7 +124,7 @@ class Board extends Component
   eachComment = (text,i) =>
   {
     return(
-            <Comment className="card text-white bg-primary mb-3"  key={i} index={i} updateCommentText={this.updateComment} removeComment={this.removeComment}>
+            <Comment className="card text-white bg-primary mb-3"  key={i} index={i} updateCommentData={this.updateComment} removeComment={this.removeComment}>
                     {text}
             </Comment>
       );
@@ -147,11 +147,11 @@ class Board extends Component
 
 
 
-//only made to cover up <Board > component
+//only made to cover up <Layout > component
 class App extends Component {
   render() {
     return (
-      <Board className="centre"/>  //since class is a predefined keyword, "className" is used in JSX
+      <Layout className="centre"/>  //since class is a predefined keyword, "className" is used in JSX
     );
   }
 }
